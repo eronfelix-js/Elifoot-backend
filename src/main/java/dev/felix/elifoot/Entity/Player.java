@@ -1,5 +1,6 @@
 package dev.felix.elifoot.Entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import dev.felix.elifoot.Enum.Position;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,12 +20,12 @@ public class Player {
     private Long id;
     private String name;
     private String position;
-
-    @Enumerated(EnumType.STRING)
-    private Position shirtNumber;
+    private int shirtNumber;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String urlImg;
 
     @ManyToOne
-    @JoinColumn(name = "club_id", nullable = false)
+    @JoinColumn(name = "club_id")
     private Club club;
+
 }

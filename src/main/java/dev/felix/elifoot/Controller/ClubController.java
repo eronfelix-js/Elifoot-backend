@@ -5,6 +5,7 @@ import dev.felix.elifoot.Controller.Response.ClubDetailResponse;
 import dev.felix.elifoot.Controller.Response.ClubResponse;
 import dev.felix.elifoot.Service.ClubService;
 import dev.felix.elifoot.Service.CreateClubService;
+import dev.felix.elifoot.Service.findPLayerSErvice;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +19,7 @@ public class ClubController {
 
     private final ClubService service;
     private final CreateClubService create;
+    private final findPLayerSErvice findPLayerSErvice;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -34,6 +36,12 @@ public class ClubController {
     @ResponseStatus(HttpStatus.CREATED)
     public ClubDetailResponse create(@RequestBody ClubCreateRequest request) {
        return create.execute(request);
+    }
+
+    @GetMapping("/{id}/players")
+    @ResponseStatus(HttpStatus.OK)
+    public void findPlayersByClubId(@PathVariable Long id) {
+        findPLayerSErvice.findPlayersByClubId(id);
     }
 
 }

@@ -24,3 +24,9 @@ spring:
 
 server:
   port: 8080
+
+jwt:
+  public:
+   key: classPath:authz.pub
+  private:
+   key: classPath:authn.pem
