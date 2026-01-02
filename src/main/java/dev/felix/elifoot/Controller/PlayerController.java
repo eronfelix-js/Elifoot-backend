@@ -1,5 +1,7 @@
 package dev.felix.elifoot.Controller;
 
+import dev.felix.elifoot.Config.secutiry.anotetions.CanReadPLayer;
+import dev.felix.elifoot.Config.secutiry.anotetions.CanWritePLayer;
 import dev.felix.elifoot.Controller.Request.CreatePlayerRequest;
 import dev.felix.elifoot.Controller.Response.PLayerDetailReponse;
 import dev.felix.elifoot.Controller.Response.PlayerResponse;
@@ -20,16 +22,19 @@ public class PlayerController {
     private final findPLayerSErvice service;
     private final CreatePlayerService createService;
 
+    @CanReadPLayer
     @GetMapping
     public Page<PlayerResponse> findAll(Pageable pageable) {
         return service.execute(pageable);
     }
 
+    @CanReadPLayer
     @GetMapping("/{id}")
     public PLayerDetailReponse findById(Long id) {
         return service.findById(id);
     }
 
+    @CanWritePLayer
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public PLayerDetailReponse createPlayer(@Valid @RequestBody CreatePlayerRequest request) {

@@ -18,9 +18,14 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "player_seq_gen")
     @SequenceGenerator(name = "player_seq_gen", sequenceName = "player_seq", allocationSize = 1)
     private Long id;
+
     private String name;
-    private String position;
+
+    @Enumerated(EnumType.STRING)
+    private Position position;
+
     private int shirtNumber;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String urlImg;
 

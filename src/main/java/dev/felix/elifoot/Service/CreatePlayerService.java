@@ -18,7 +18,7 @@ public class CreatePlayerService {
 
     public PLayerDetailReponse execute(CreatePlayerRequest request) {
         var newPlayer = mapper.toRequest(request);
-        newPlayer.setClub(clubService.findById(request.getClubId()));
+        //newPlayer.setClub(clubService.findById(request.getClubId()));
         var savedPlayer = repository.save(newPlayer);
         return mapper.toDetailResponse(savedPlayer);
     }

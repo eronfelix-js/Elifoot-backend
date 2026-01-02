@@ -9,7 +9,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 public class CorsConfig {
 
     @Bean
-    private CorsConfigurationSource corsConfigurationSource(){
+    public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOriginPattern("*");
         configuration.addAllowedHeader("*");

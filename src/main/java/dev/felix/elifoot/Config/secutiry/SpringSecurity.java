@@ -1,4 +1,4 @@
-package dev.felix.elifoot.Config;
+package dev.felix.elifoot.Config.secutiry;
 
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSet;
@@ -22,7 +22,6 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.security.interfaces.RSAPrivateKey;
@@ -30,13 +29,13 @@ import java.security.interfaces.RSAPublicKey;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(securedEnabled = true, prePostEnabled = true)
+@EnableMethodSecurity(securedEnabled = true)
 public class SpringSecurity {
 
-    @Value("${jwt.rsa.public.key}")
+    @Value("${jwt.public.key}")
     private RSAPublicKey rsaPublicKey;
 
-    @Value("${jwt.rsa.private.key}")
+    @Value("${jwt.private.key}")
     private RSAPrivateKey rsaPrivateKey;
 
     @Bean
@@ -56,19 +55,19 @@ public class SpringSecurity {
     }
 
     @Bean
-    private JwtDecoder jwtDencoder(){
+    public JwtDecoder jwtDencoder(){
         return NimbusJwtDecoder.withPublicKey(rsaPublicKey).build();
     }
 
     @Bean
-    private JwtEncoder jwtEncoder(){
+    public JwtEncoder jwtEncoder(){
       JWK jwk = new RSAKey.Builder(this.rsaPublicKey).privateKey(rsaPrivateKey).build();
       ImmutableJWKSet<SecurityContext> jwkSet = new ImmutableJWKSet<>(new JWKSet(jwk));
       return new NimbusJwtEncoder(jwkSet);
     }
 
     @Bean
-    private PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 }

@@ -27,6 +27,6 @@ server:
 
 jwt:
   public:
-   key: classPath:authz.pub
+    key: classpath:authz.pub
   private:
-   key: classPath:authn.pem
+    key: classpath:authz.pem

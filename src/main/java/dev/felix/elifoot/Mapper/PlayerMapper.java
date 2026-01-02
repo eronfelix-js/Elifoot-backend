@@ -12,7 +12,7 @@ import org.mapstruct.Named;
 @Mapper(componentModel = "spring")
 public interface PlayerMapper {
 
-    @Mapping(target = "position", source = "position", qualifiedByName = "positionToString")
+    @Mapping(target = "position", source = "position", qualifiedByName = "EnumToString")
     PlayerResponse toResponse(Player player);
 
     PLayerDetailReponse toDetailResponse(Player player);
