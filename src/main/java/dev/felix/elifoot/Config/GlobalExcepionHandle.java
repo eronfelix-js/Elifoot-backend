@@ -1,6 +1,7 @@
 package dev.felix.elifoot.Config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import dev.felix.elifoot.Exception.ResourceAlreadyExists;
 import dev.felix.elifoot.Exception.ResourceNotFoundException;
 import lombok.Builder;
 import lombok.Getter;

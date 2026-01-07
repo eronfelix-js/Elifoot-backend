@@ -4,6 +4,7 @@ import dev.felix.elifoot.Controller.Request.CreateUserRequest;
 import dev.felix.elifoot.Controller.Response.UserResponse;
 import dev.felix.elifoot.Entity.Scope;
 import dev.felix.elifoot.Entity.User;
+import dev.felix.elifoot.Exception.ResourceNotFoundException;
 import dev.felix.elifoot.Mapper.UserMapper;
 import dev.felix.elifoot.REpository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class createUserService {
 
     public UserResponse execute(CreateUserRequest request){
         if (repository.existsByEmail(request.getEmail())) {
-            throw new IllegalArgumentException("Email already in use: " + request.getEmail());
+            throw new ResourceNotFoundException("Email already in use: " + request.getEmail());
         }
 
         List<Scope> scope = request.getScopes().stream()
